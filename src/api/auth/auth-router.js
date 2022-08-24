@@ -1,10 +1,11 @@
 import express from 'express';
 import {
-     signInC, signUpC,
+     signInC, signUpC, verifyEmailC,
 } from './auth-controller.js';
 import {
      isCorrectPropertyAV, validateSignUpUser,
      validateSignInUser,
+     validateUserToken,
 } from './auth-validator.js';
 
 const router = express.Router();
@@ -20,4 +21,10 @@ router.post(
      isCorrectPropertyAV,
      signUpC,
 );
+router.post(
+     '/verify',
+     ...validateUserToken,
+     verifyEmailC,
+);
+
 export default router;

@@ -1,9 +1,8 @@
 /* eslint-disable no-prototype-builtins */
-import { errorSignIn } from '../../constants/constant-errors.js';
 import { toHashPassword } from '../../utils/bcrypt.js';
 import { ServerError } from '../../utils/custom-errors.js';
 import {
-     createUserR, getUsersR, getUserR, getUserByEmailR,
+     createUserR, getUsersR, getUserR, getUserByEmailR, updateUserR,
 } from './users-repository.js';
 
 export const getUsersS = async () => getUsersR();
@@ -27,4 +26,7 @@ export const createUserS = async (user) => {
           ...user,
           password: await toHashPassword(user.password),
      });
+};
+export const updateUserS = async (id, updProp) => {
+     await updateUserR(id, updProp);
 };

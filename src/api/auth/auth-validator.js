@@ -1,7 +1,7 @@
 /* eslint-disable no-prototype-builtins */
 import { body } from 'express-validator';
 import {
-     errorAlpha, errorAlphanumeric, errorEmail, errorLength, errorNotEmpty, errorNumber,
+     errorAlpha, errorAlphanumeric, errorEmail, errorJWT, errorLength, errorNotEmpty, errorNumber,
 } from '../../constants/constant-errors.js';
 import { ValidatorError } from '../../utils/custom-errors.js';
 import expressValidation from '../../utils/express-utils.js';
@@ -24,6 +24,14 @@ export const isCorrectPropertyAV = (req, res, next) => {
      });
      next();
 };
+export const validateUserToken = [
+     body('token')
+          .notEmpty()
+          .withMessage(errorNotEmpty('Email'))
+          .isJWT()
+          .withMessage(errorJWT),
+     expressValidation,
+];
 export const validateSignUpUser = [
      body('firstName').notEmpty().withMessage(errorNotEmpty('firstName')).isLength({ min: 2, max: 15 })
           .withMessage(errorLength(2, 15))

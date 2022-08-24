@@ -4,3 +4,4 @@ export const getUsersR = async () => User.find();
 export const getUserR = async (id) => User.findOne({ id });
 export const getUserByEmailR = async (email) => User.findOne({ email });
 export const createUserR = async (user) => new User(user).save();
+export const updateUserR = async (id, updProp) => User.updateOne({ _id: id }, { $set: updProp });
